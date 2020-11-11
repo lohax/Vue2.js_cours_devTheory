@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js - Conditions</title>
+    <script src="vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <style>
+        p {
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <button @click="show = !show">Inverser</button>
+        <button @click="color == 'blue' ? color='blue' : color='red'">Inverser</button>
+        <template v-if="color == 'red'">
+            <p >c'est du rouge</p>
+            <strong>oui, du rouge</strong>
+        </template>
+        <p v-else-if="color == 'blue'">c'est du bleu</p>
+        <p v-else>c'est ni du rouge, ni du bleu</p>
+        <p v-show='show'>Gestion avec v-show, qui fait du display none</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: false,
+                color: 'red'
+            }
+        })
+    </script>
+</body>
+
+</html>

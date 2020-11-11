@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js - Hooks</title>
+    <!-- <script src="vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <button @click="editTitle">Click</button>
+    </div>
+
+</body>
+
+<script>
+    const vm1 = new Vue({
+        el: '#app',
+        data: {
+            title: 'Hello world !'
+        },
+        methods: {
+            editTitle: function() {
+                this.title = "New Title !"
+            }
+        },
+        beforeCreate: function(){
+            console.info('beforeCreate')
+        },
+        created: function(){
+            console.info('created')
+        },
+        beforeUpdate: function(){
+            console.info('beforeUpdate')
+        
+        },
+        updated: function(){
+            console.info('updated')
+        },
+        beforeDestroy: function(){
+            console.info('beforeUpdate')
+        
+        },
+        destroyed: function(){
+            console.info('updated')
+        }
+    })
+</script>
+
+</html>

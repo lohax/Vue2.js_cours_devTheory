@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js - Instances</title>
+    <!-- <script src="vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <span ref="mySpan">test</span>
+    </div>
+
+    <div id="app2">
+        <h1>{{ title }}</h1>
+    </div>
+
+    <div id="app3">
+
+    </div>
+
+    <script>
+
+        const data = {
+            title: 'Les instances de vuejs'
+        }
+
+        const vm1 = new Vue({ //vm = vue modele
+            //el: '#app',
+            data: data,
+            methods: {
+                show: function () {
+                    console.log('titre = ' + vm1.title);
+                }
+            }
+        })
+
+
+
+        /** 
+           en mettant en variable (vm) l'instance de vuejs, on peut y acceder en js hors de vuejs
+        *! on pourrait penser que l'on peut acceder au title via vm.data.title, mais non.
+        ** on peut avec vm.title directement
+        */
+
+        data.title = 'Nouveau titre'
+        vm1.show();
+        console.log(vm1.title);
+
+        /**
+        ** il faut bien, comprendre que tout les éléments sont liés. data.title est = a vm.title
+        *! Par contre on ne peut pas en rajouter apres. Il faut que toutes les variables soient defini au depart.
+        */
+
+        // On peut aussi avoir plusieurs instances de vuejs dans la meme page. 
+        // Les deux n'auront absolument aucun lien, meme si les variable ont le meme nom
+        // Si on veux faire interagir les deux instance, il faut les variabiliser. vm1, vm2
+
+        const vm2 = new Vue({ //vm = vue modele
+            el: '#app2',
+            data: {
+                title: 'Titre deuxieme instance'
+            }
+            ,
+            methods: {
+                show: function () {
+                    console.log('titre 1 = ' + vm1.title);
+                    console.log('titre 2 = ' + vm2.title);
+                }
+            }
+        })
+
+        vm2.show();
+
+        // Si on ne veut pas donner de el a lier a une instance, on peut le faire en asynchrone
+
+        vm1.$mount('#app')
+
+
+        // cas de l'attribut ref et de $refs
+        // on a definit un sapn avec attribut ref on on peut y acceder comme suit :
+
+        console.log(vm1.$refs.mySpan)
+
+
+        var vm3 = new Vue({
+            template: '<h3>Template !!!</h3>'
+        })
+
+
+        vm3.$mount('#app3')
+    </script>
+</body>
+
+</html>

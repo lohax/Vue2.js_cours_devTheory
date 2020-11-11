@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+    <!-- <script src="vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- <test-component v-for="title in titles" :title="title" my-text="Test"></test-component> -->
+        <test-component title='hello'></test-component>
+
+    </div>
+
+</body>
+
+<script>
+    // component global
+    Vue.component('test-component', {
+        // my-text dans html myText en js. Vue reconnait- 
+        // ici props via array
+        //props: ['title','myText'], 
+
+        // maintenant via objet
+        // props: {
+        //     title : [Number, String, Boolean]
+        // }, 
+        // maintenant via objet + objet
+        props: {
+            title : {
+                type: [Number, String, Boolean],
+                required: true,
+                default: 'Hello World'
+            }
+        }, 
+        
+        template: '<h1 @click=clickTest>{{ title }}</h1>',
+        methods: {
+            clickTest: function () {
+                alert(this.myText)
+            }
+        }
+    })
+
+
+    new Vue({
+        el: '#app',
+        // data: {
+        //     titles: ['Helloooo', 'World']
+        // }
+
+    })
+
+</script>
+
+</html>

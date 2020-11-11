@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+    <script src="vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+
+</head>
+
+<body>
+
+    <div id="app">
+        <h1 v-once>{{ title + '!!!' }}</h1>
+        <h1>{{ title }}</h1>
+        <h1>{{ title == 'Super intro !' ? 'Bon sens' : 'Mauvais sens' }}</h1>
+        <button v-on:click="reverseTitle">Inverser</button>
+        <!-- <p v-bind:title="title">lkf fhdsj fhjkdshf jusd</p> -->
+        <p :title="title">
+            lkf fhdsj fhjkdshf jusd
+            <br />
+            <span v-html="strongTag"></span>
+        </p>
+        <input type="text" v-model="title"> <!--  v-model sert donc a lier une variable a un input par ex -->
+
+        <br />
+        <span>---------------------</span>
+        <br />
+        <!-- <button v-on:click="increase">Incrémenter</button> -->
+        <!-- <button @click="increase(1, $event)">Incrémenter</button>-->
+        <!--version raccourci -->
+        <!-- $event permet de signaler que l'on veut utiliser event en + de notre argument perso -->
+        <!-- <button @click="decrease(1, $event)">Décrémenter</button> -->
+        <button @click="counter++">Incrémenter</button> <!-- version raccourci -->
+        <!-- $event permet de signaler que l'on veut utiliser event en + de notre argument perso -->
+        <button @click="counter--">Décrémenter</button>
+        <h3>{{ counter }}</h3>
+        <h3>{{ wordComputed }}</h3>
+
+        <p @mouseover="hover">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
+            <strong @mouseover.stop="">Important</strong> <br><!-- .stop = stopPropagation - evite de faire une func-->
+            Balise : {{ tagname }}
+        </p>
+        <br>
+        <input type="text" @keyup.space.enter="myAlert">
+        <!-- 
+            .space.enter pour faire deprendre l'execution de la touche pressé 
+            * plus d'info sur la doc sur les key modifier (combinaison de touche etc)
+        -->
+
+    </div>
+    <script>
+        new Vue({
+
+            el: '#app',
+            data: {
+                title: 'titre 1',
+                strongTag: `<strong>IMPORTANT!</strong> exemple interprétation de l'html`,
+                counter: 0,
+                tagname: '',
+                word: 'Positif'
+            },
+            computed: { //(le plus optimisé si utilisable) operation synchrone + plus rapide - lmiaison entre deux variables
+                wordComputed: function () {
+                    return this.counter < 0 ? 'Négatif' : 'Positif'
+                }
+            },
+            watch: { //operations plus longue, asynchrone
+                counter: function (value) {
+                    this.word = this.counter < 0 ? 'Négatif' : 'Positif'
+                }
+            },
+            methods: {
+                reverseTitle: function () {
+                    this.title = this.title.split('').reverse().join('')
+                },
+                increase: function (step, event) {
+                    this.counter += step
+                    this.tagname = event.target.tagName
+                    this.word = this.counter > 0 ? 'Positif' : 'Négatif'
+                },
+                decrease: function (step, event) {
+                    this.counter -= step
+                    this.word = this.counter > 0 ? 'Positif' : 'Négatif'
+                },
+                hover: function (event) {
+                    this.tagname = event.target.tagName
+                },
+                myAlert: function (event) {
+                    alert('tete')
+                }
+
+            }
+
+        }) 
+    </script>
+</body>
+
+</html>

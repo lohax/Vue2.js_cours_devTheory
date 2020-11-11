@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js - class</title>
+    <script src="vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <style>
+        .title {
+            font-style: italic;
+            font-size: 35px;
+        }
+        .blue { color: blue; }
+        .red { color: red; }
+        .underline { text-decoration: underline;}
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <button @click="isBlue = !isBlue">Bleu</button>
+        <button @click="isUnderline = !isUnderline">Souligné</button>
+        <h1 class="title" :class="[myClass, { red : !isBlue}]">Titre 1</h1>
+        <h1 class="title" :class="myClass">Titre 2</h1>
+        <h1 class="title" :class="color">Titre 3</h1>
+
+        <input type="text" v-model="color">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isBlue : true,
+                isUnderline : false,
+                color : 'red'
+            },
+            computed: {
+                myClass: function(){
+                    return {
+                        blue : this.isBlue,
+                        underline : this.isUnderline
+
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

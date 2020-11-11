@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+    <!-- <script src="vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <test-component></test-component>
+        <test-component></test-component>
+
+    </div>
+
+    <div id="app2">
+        <test-component></test-component>
+
+    </div>
+
+</body>
+
+<script>
+    // component global
+    Vue.component('test-component', {
+        data: function(){ /* Dans un component, le data est transformé en fonction avec un return object  */
+            return {
+                title: 'Hello toto !'
+            }
+        },
+        template: '<h1>{{ title }}</h1>'  
+    })
+
+    // component local a une instance
+    let component = {
+        data: function(){ /* Dans un component, le data est transformé en fonction avec un return object  */
+            return {
+                title: 'Hello toto !'
+            }
+        },
+        template: '<h1>{{ title }}</h1>'  
+    }
+
+
+    new Vue({
+        el: '#app'
+        
+    })
+
+    new Vue({
+        el: '#app2',
+        components: {
+            'test-component': component
+        }
+        
+    })
+</script>
+
+</html>

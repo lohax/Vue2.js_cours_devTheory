@@ -1,0 +1,73 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js - Boucles</title>
+    <script src="vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <style>
+        li {
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <ul>
+            <li>{{ names[0] }}</li>
+            --
+            <li v-for="myObject in names">{{ myObject.name }}</li>
+            <li v-for="(myObject, index) in names">{{ index }} - {{ myObject.name }}</li>
+        </ul>
+
+        <template v-for="(myObject, index)  in names">
+            <h1>{{ myObject.name }}</h1>
+            <span>{{ myObject.age }}</span>
+        </template>
+
+        <br>
+        -----------------------------------------
+        <br>
+
+        <template v-for="myObject in names">
+            <h1 v-for="(info, key, i) in myObject">{{ key }} : {{ info }} ({{ i }})</h1 v-for>
+        </template>
+        <!-- ici c'est une double iteration  -->
+
+        <br>
+        --------------------------------------------
+        <br>
+
+        <!-- boucler sur un nombre defini d'occurences - operation possible -->
+        <ul>
+            <li v-for="n in 10">{{ n*2 }}</li>
+        </ul>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                names: [
+                    {
+                        name: 'John',
+                        age: 23
+                    },
+                    {
+                        name: 'Jane',
+                        age: 28
+                    },
+                    {
+                        name: 'Alex',
+                        age: 32
+                    },
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>
